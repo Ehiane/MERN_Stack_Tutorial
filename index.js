@@ -9,6 +9,7 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import { error } from "console";
+import {register} from "./controllers/auth.js"
 
 //#USE 'nodemon run' to run server
 
@@ -39,7 +40,16 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage})
+
+/* ROUTES  WITH FILES */ 
+/*middle ware Funct*/ 
+app.post("/auth/register", upload.single("picture"), register) //all the uploaded pictures will be locally uploaded to 'public/assests'
+
+
+
+
 /*MONGOOSE SETUP*/
+
 const PORT = process.env.PORT || 6001;  //if it doesn't work got to port 6001
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
@@ -47,3 +57,9 @@ mongoose.connect(process.env.MONGO_URL,{
 }).then(()=> {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 }).catch((error) => console.log(`${error} did not connect`));
+
+/*Authentication VS Authorization
+//*Authentication is basically registering and login
+//*Authorization is making sure someone is logged in to perform certain operations
+
+*/ 
