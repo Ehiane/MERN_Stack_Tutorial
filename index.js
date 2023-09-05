@@ -13,6 +13,7 @@ import { error } from "console";
 //#USE 'nodemon run' to run server
 
 /* CONFIGURATIONS --middleware(functions that run inbetween request)*/
+
 const __filename = fileURLToPath(import.meta.url); //to use module
 const __dirname = path.dirname(__filename);
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(cors())
 app.use("/assets", express.static(path.join(__dirname, 'public/assets'))); //sets the directory of our images in a remote place.
 
 /* FILE STORAGE CONFIGURATIONS*/
+
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
         cb(null, "public/assets")
