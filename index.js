@@ -8,7 +8,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import { error } from "console";
 
+//#USE 'nodemon run' to run server
 
 /* CONFIGURATIONS --middleware(functions that run inbetween request)*/
 const __filename = fileURLToPath(import.meta.url); //to use module
@@ -35,3 +37,11 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage})
+/*MONGOOSE SETUP*/
+const PORT = process.env.PORT || 6001;  //if it doesn't work got to port 6001
+mongoose.connect(process.env.MONGO_URL,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(()=> {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+}).catch((error) => console.log(`${error} did not connect`));
