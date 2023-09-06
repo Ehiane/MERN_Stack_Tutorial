@@ -10,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js"
 import {register} from "./controllers/auth.js"
+import userRoutes from "./routes/users.js"
 import { verifyToken } from "./middleware/auth.js";
 
 //#USE 'nodemon run' to run server
@@ -48,6 +49,8 @@ app.post("/auth/register", upload.single("picture"), verifyToken ,register) //al
 
 /*ROUTES*/ 
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+
 
 /*MONGOOSE SETUP*/
 
