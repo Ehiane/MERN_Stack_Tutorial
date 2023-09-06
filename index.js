@@ -10,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js"
 import {register} from "./controllers/auth.js"
+import { verifyToken } from "./middleware/auth.js";
 
 //#USE 'nodemon run' to run server
 
@@ -43,7 +44,7 @@ const upload = multer({storage})
 
 /* ROUTES  WITH FILES */ 
 /*middle ware Funct*/ 
-app.post("/auth/register", upload.single("picture"), register) //all the uploaded pictures will be locally uploaded to 'public/assests'
+app.post("/auth/register", upload.single("picture"), verifyToken ,register) //all the uploaded pictures will be locally uploaded to 'public/assests'
 
 /*ROUTES*/ 
 app.use("/auth", authRoutes);
