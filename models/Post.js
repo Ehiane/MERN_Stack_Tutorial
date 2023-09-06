@@ -36,4 +36,4 @@ const Post = mongoose.model("Post", postSchema);
 
 export default Post;
 
-
+//# in the video you stopped at 1:24:11

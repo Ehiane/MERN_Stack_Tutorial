@@ -18,6 +18,21 @@ import { verifyToken } from "./middleware/auth.js";
 
 //#USE 'nodemon run' to run server
 
+/*
+$ "async"- 
+*    this is a function that is used for process or computations that may take time to complete.
+*   they perform tasks in the background without blocking the execution of the rest of your code.
+*   mostly used in network requests, file reading or timers; without freezing the entire program.
+
+$ "status codes"
+* 404- generic request error
+* 409- generic post/creation error
+* 200-  successful request
+* 201-  successful creation
+
+*/ 
+
+
 /* CONFIGURATIONS --middleware(functions that run inbetween request)*/
 
 const __filename = fileURLToPath(import.meta.url); //to use module
