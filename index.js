@@ -9,9 +9,12 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js"
-import {register} from "./controllers/auth.js"
 import userRoutes from "./routes/users.js"
+import postRoutes from "./routes/posts.js"
+import {register} from "./controllers/auth.js"
+import {createPost} from "./controllers/posts.js"
 import { verifyToken } from "./middleware/auth.js";
+
 
 //#USE 'nodemon run' to run server
 
@@ -45,11 +48,13 @@ const upload = multer({storage})
 
 /* ROUTES  WITH FILES */ 
 /*middle ware Funct*/ 
-app.post("/auth/register", upload.single("picture"), verifyToken ,register) //all the uploaded pictures will be locally uploaded to 'public/assests'
+app.post("/auth/register", upload.single("picture"), register) //all the uploaded pictures will be locally uploaded to 'public/assests'
+app.post("/posts", verifyToken, upload.single("picture"), createPost) 
 
 /*ROUTES*/ 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/posts", postRoutes);
 
 
 /*MONGOOSE SETUP*/
